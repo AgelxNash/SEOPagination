@@ -1,7 +1,7 @@
 Laravel SEO Pagination
 ====================
-This expansion pack pagination laravel. With it, you can prevent the opening of blank pages.
-For example, in your pagination has only 10 pages, but the user has requested page with number 101. With this expansion pack, user redirected to the last (10) or first page... or send 404 error.
+This extension pack pagination laravel. With it, you can prevent the opening of blank pages.
+For example, in your pagination has only 10 pages, but the user has requested page with number 101. With this extension pack, user redirected to the last (10) or first page... or send 404 error.
 
 And most importantly, paginator now contains no reference to the first page with the GET variable.
 ### Old
