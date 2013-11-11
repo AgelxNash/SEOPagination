@@ -1,0 +1,4 @@
+SEOPagination
+=============
+
+Laravel SEO Pagination
