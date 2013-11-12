@@ -60,7 +60,7 @@ Look at the example method of a controller with check pagination:
 public function example()
 {
 	$post = Post::->orderBy('created_at', 'DESC')->paginate(10);
-	if(!is_object($out = \AgelxNash\SEOPagination\Validation::checkPaginate($data)))
+	if(!is_object($out = \AgelxNash\SEOPagination\Validation::checkPaginate($post)))
 	{
 		$out = View::make('index', array('data'=> $post));
 	}
