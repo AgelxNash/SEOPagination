@@ -11,7 +11,7 @@ class Validation{
         $flag = false;
         $request = Request::get($pages->getEnvironment()->getPageName());
         if($pages->isEmpty() || (1==$pages->getCurrentPage() && !is_null($request) && (int)$request<=1)){
-			if($pages->getEnvironment()->checkQuery()){
+			if($pages->getEnvironment()->getKeepQuery()){
                 $query = array_except( Input::query(), $pages->getEnvironment()->getPageName() );
                 $pages->appends($query);
             }
