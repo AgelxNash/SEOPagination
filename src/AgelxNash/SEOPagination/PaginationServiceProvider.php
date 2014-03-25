@@ -18,6 +18,7 @@ class PaginationServiceProvider extends \Illuminate\Pagination\PaginationService
             $paginator->setViewName($app['config']['view.pagination']);
             $paginator->setActionOnError($app['config']->get('seopagination::action_on_error','out'));
             $paginator->setErrorStatus($app['config']->get('seopagination::error_status','307'));
+			$paginator->setKeepQuery($app['config']->get('seopagination::keep_query', false));
             return $paginator;
         });
     }

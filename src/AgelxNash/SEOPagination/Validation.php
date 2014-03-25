@@ -1,6 +1,6 @@
 <?php namespace AgelxNash\SEOPagination;
 
-use App, Redirect, Request;
+use App, Redirect, Request, Input;
 
 class Validation{
     /**
@@ -11,6 +11,10 @@ class Validation{
         $flag = false;
         $request = Request::get($pages->getEnvironment()->getPageName());
         if($pages->isEmpty() || (1==$pages->getCurrentPage() && !is_null($request) && (int)$request<=1)){
+			if($pages->getEnvironment()->checkQuery()){
+                $query = array_except( Input::query(), $pages->getEnvironment()->getPageName() );
+                $pages->appends($query);
+            }
             $action = $pages->getEnvironment()->getActionOnError();
             switch($action){
                 case 'abort':{

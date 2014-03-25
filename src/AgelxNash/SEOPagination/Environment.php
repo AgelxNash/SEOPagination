@@ -3,7 +3,7 @@
 class Environment extends \Illuminate\Pagination\Environment{
     protected $actionOnError = null;
     protected $errorStatus  = null;
-
+	protected $keepQuery = false;
     /**
      * Get a new paginator instance.
      *
@@ -30,5 +30,11 @@ class Environment extends \Illuminate\Pagination\Environment{
 
     public function setErrorStatus($data){
         $this->errorStatus = $data;
+    }
+	public function setKeepQuery($data){
+		$this->keepQuery = (bool) $data;
+	}
+	public function getKeepQuery(){
+        return $this->keepQuery;
     }
 }
