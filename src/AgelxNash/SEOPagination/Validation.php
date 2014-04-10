@@ -23,6 +23,7 @@ class Validation{
                 }
 				case 'first':{
                     $flag = Redirect::to($pages->getUrl(0), $pages->getEnvironment()->getErrorStatus());
+					break;
                 }
                 case 'out':{
                     $url = (1 == $pages->getCurrentPage()) ? 0 : $pages->getLastPage();
