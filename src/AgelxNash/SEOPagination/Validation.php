@@ -1,6 +1,6 @@
 <?php namespace AgelxNash\SEOPagination;
 
-use App, Redirect, Request, Input;
+use App, Redirect, Request;
 
 class Validation{
     /**
@@ -10,9 +10,9 @@ class Validation{
     public static function checkPaginate(Paginator &$pages){
         $flag = false;
         $request = Request::get($pages->getEnvironment()->getPageName());
-        if($pages->isEmpty() || (1==$pages->getCurrentPage() && !is_null($request) && (int)$request<=1)){
+        if(($pages->isEmpty() && 1!=$pages->getCurrentPage()) || (1==$pages->getCurrentPage() && !is_null($request) && (int)$request<=1)){
 			if($pages->getEnvironment()->getKeepQuery()){
-                $query = array_except( Input::query(), $pages->getEnvironment()->getPageName() );
+                $query = array_except( Request::query(), $pages->getEnvironment()->getPageName() );
                 $pages->appends($query);
             }
             $action = $pages->getEnvironment()->getActionOnError();
