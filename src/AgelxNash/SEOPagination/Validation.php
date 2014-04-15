@@ -7,11 +7,14 @@ class Validation{
      * @param Paginator $pages
      * @return bool|\Illuminate\Http\RedirectResponse|\Illuminate\Pagination\Paginator
      */
-    public static function checkPaginate(Paginator &$pages){
+    public static function checkPaginate(Paginator &$pages, $keepQuery = null){
         $flag = false;
         $request = Request::get($pages->getEnvironment()->getPageName());
         if(($pages->isEmpty() && 1!=$pages->getCurrentPage()) || (1==$pages->getCurrentPage() && !is_null($request) && (int)$request<=1)){
-			if($pages->getEnvironment()->getKeepQuery()){
+            if(is_null($keepQuery)){
+                $keepQuery = $pages->getEnvironment()->getKeepQuery();
+            }
+            if($keepQuery){
                 $query = array_except( Request::query(), $pages->getEnvironment()->getPageName() );
                 $pages->appends($query);
             }
@@ -21,9 +24,9 @@ class Validation{
                     $flag = App::abort(404);
                     break;
                 }
-				case 'first':{
+                case 'first':{
                     $flag = Redirect::to($pages->getUrl(0), $pages->getEnvironment()->getErrorStatus());
-					break;
+                    break;
                 }
                 case 'out':{
                     $url = (1 == $pages->getCurrentPage()) ? 0 : $pages->getLastPage();
