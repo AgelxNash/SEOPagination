@@ -10,7 +10,8 @@ class Validation{
     public static function checkPaginate(Paginator &$pages, $keepQuery = null){
         $flag = false;
         $request = Request::get($pages->getEnvironment()->getPageName());
-        if(($pages->isEmpty() && 1!=$pages->getCurrentPage()) || (1==$pages->getCurrentPage() && !is_null($request) && (int)$request<=1)){
+        $cPage = $pages->getCurrentPage();
+        if(($pages->isEmpty() && 1!=$cPage) || (1==$cPage && !is_null($request) && (int)$request!=$cPage)){
             if(is_null($keepQuery)){
                 $keepQuery = $pages->getEnvironment()->getKeepQuery();
             }
@@ -34,6 +35,7 @@ class Validation{
                     break;
                 }
                 default:{
+                    throw new Exceptions\PageNotFound;
                 }
             }
         }
