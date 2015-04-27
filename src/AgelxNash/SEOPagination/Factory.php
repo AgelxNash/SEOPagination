@@ -1,6 +1,6 @@
 <?php namespace AgelxNash\SEOPagination;
 
-class Environment extends \Illuminate\Pagination\Environment{
+class Factory extends \Illuminate\Pagination\Factory{
     protected $actionOnError = null;
     protected $errorStatus  = null;
 	protected $keepQuery = false;
@@ -12,7 +12,7 @@ class Environment extends \Illuminate\Pagination\Environment{
      * @param  int    $perPage
      * @return Paginator
      */
-    public function make(array $items, $total, $perPage){
+    public function make(array $items, $total, $perPage = null){
         $paginator = new Paginator($this, $items, $total, $perPage);
         return $paginator->setupPaginationContext();
     }

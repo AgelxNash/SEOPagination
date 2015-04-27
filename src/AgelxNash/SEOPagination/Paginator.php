@@ -5,7 +5,7 @@ class Paginator extends \Illuminate\Pagination\Paginator{
     {
         if($page > 1){
             $parameters = array(
-                $this->env->getPageName() => $page,
+                $this->factory->getPageName() => $page,
             );
         }else{
             $parameters = array();
@@ -17,7 +17,9 @@ class Paginator extends \Illuminate\Pagination\Paginator{
         {
             $parameters = array_merge($parameters, $this->query);
         }
-        $q = http_build_query($parameters, null, '&');
-        return $this->env->getCurrentUrl(). (!empty($q) ? '?' : '') . $q;
+		$q = http_build_query($parameters, null, '&');
+		$fragment = $this->buildFragment();
+
+		return $this->factory->getCurrentUrl(). (!empty($q) ? '?' : '') . $q . $fragment;
     }
 }
