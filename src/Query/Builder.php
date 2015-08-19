@@ -9,11 +9,12 @@ class Builder extends \Illuminate\Database\Query\Builder{
 	 *
 	 * @param  int  $perPage
 	 * @param  array  $columns
+	 * @param  string  $pageName
 	 * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
 	 */
-	public function paginate($perPage = 15, $columns = ['*'])
+	public function paginate($perPage = 15, $columns = ['*'], $pageName = 'page')
 	{
-		$page = Paginator::resolveCurrentPage();
+		$page = Paginator::resolveCurrentPage($pageName);
 
 		$total = $this->getCountForPagination($columns);
 
@@ -21,6 +22,7 @@ class Builder extends \Illuminate\Database\Query\Builder{
 
 		return new LengthAwarePaginator($results, $total, $perPage, $page, [
 			'path' => Paginator::resolveCurrentPath(),
+			'pageName' => $pageName,
 		]);
 	}
 
@@ -31,16 +33,18 @@ class Builder extends \Illuminate\Database\Query\Builder{
 	 *
 	 * @param  int  $perPage
 	 * @param  array  $columns
+	 * @param  string  $pageName
 	 * @return \Illuminate\Contracts\Pagination\Paginator
 	 */
-	public function simplePaginate($perPage = 15, $columns = ['*'])
+	public function simplePaginate($perPage = 15, $columns = ['*'], $pageName = 'page')
 	{
-		$page = Paginator::resolveCurrentPage();
+		$page = Paginator::resolveCurrentPage($pageName);
 
 		$this->skip(($page - 1) * $perPage)->take($perPage + 1);
 
 		return new Paginator($this->get($columns), $perPage, $page, [
 			'path' => Paginator::resolveCurrentPath(),
+			'pageName' => $pageName,
 		]);
 	}
 }

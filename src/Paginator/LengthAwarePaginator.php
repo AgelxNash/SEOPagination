@@ -7,6 +7,4 @@ class LengthAwarePaginator extends \Illuminate\Pagination\LengthAwarePaginator{
 	{
 		parent::__construct($items, $total, $perPage, $currentPage, $this->mergeOptions($options));
 	}
-	
-	
 }

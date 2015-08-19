@@ -91,7 +91,7 @@ trait ReplaceUrl{
 	public function getKeepQuery(){
 		return $this->keepQuery;
 	}
-	
+
 	protected function mergeOptions($options){
 		return array_merge(
 			[
