@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "AgelxNash\\SEOPagination": "src/"
+            "AgelxNash\\SEOPagination\\": "src/"
         }
     },
 	"support": {
