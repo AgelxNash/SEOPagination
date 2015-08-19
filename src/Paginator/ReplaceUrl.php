@@ -1,8 +1,7 @@
 <?php namespace AgelxNash\SEOPagination\Paginator;
 
-use App, Redirect, Request;
+use App, Config, Redirect, Request;
 Use AgelxNash\SEOPagination\PageNotFoundException;
-use Doctrine\DBAL\Driver\AbstractDriverException;
 
 trait ReplaceUrl{
 	protected $actionOnError = 'out';
@@ -50,7 +49,7 @@ trait ReplaceUrl{
 			$action = $this->getActionOnError();
 			switch($action){
 				case 'abort':{
-					App::abort(404, 'asd');
+					App::abort(404);
 					break;
 				}
 				case 'first':{
@@ -63,7 +62,7 @@ trait ReplaceUrl{
 					break;
 				}
 				default:{
-					throw new PageNotFoundException('zxc');
+					throw new PageNotFoundException();
 				}
 			}
 		}
@@ -91,5 +90,15 @@ trait ReplaceUrl{
 	}
 	public function getKeepQuery(){
 		return $this->keepQuery;
+	}
+	
+	protected function mergeOptions($options){
+		return array_merge(
+			[
+				'actionOnError' => \Config::get('seo-pagination.action_on_error', $this->getActionOnError()),
+				'errorStatus' => \Config::get('seo-pagination.error_status', $this->getErrorStatus()),
+				'keepQuery' => \Config::get('seo-pagination.keep_query', $this->getKeepQuery())
+			], $options
+		);
 	}
 }
