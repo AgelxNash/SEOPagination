@@ -19,7 +19,7 @@ class PaginationServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$configPath = __DIR__.'/../config/seo-pagination';
+		$configPath = __DIR__.'/../config/seo-pagination.php';
 
 		// Publish config.
 		$this->publishes([$configPath => config_path('seo-pagination.php')], 'config');
