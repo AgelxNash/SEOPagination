@@ -25,7 +25,7 @@ Installation
 ============
 ### Step 1
 ```shell
-php composer.phar require agelxnash/seopagination:1.0.*
+php composer.phar require agelxnash/seopagination:5.0.*@dev
 ```
 -------------
 
