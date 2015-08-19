@@ -54,7 +54,15 @@ Now you can edit the file `config/seo-pagination.php`
 
 Usage
 ======
-After the call paginate() method, you need check data variable in the method `checkPaginate()`. The result will be object `\Illuminate\Http\RedirectResponse` or `true`
+Add the trait to your model
+`
+use Illuminate\Database\Eloquent\Model;
+
+Class Post extends Model{
+	use \AgelxNash\SEOPagination\Eloquent\ReplaceBuilder
+}
+`
+After the call paginate() method, you can check data variable in the method `checkPaginate()`. The result will be object `\Illuminate\Http\RedirectResponse` or `true`
 Look at the example method of a controller with check pagination:
 ```php
 public function example()
