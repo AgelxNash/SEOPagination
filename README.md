@@ -30,7 +30,7 @@ php composer.phar require agelxnash/seopagination:1.0.*
 -------------
 
 ### Step 2
-Once SEOPagination is installed you need to register the service provider with the application. Open up `app/config/app.php` and replace `Illuminate\Pagination\PaginationServiceProvider` the providers key to 
+Once SEOPagination is installed you need to register the service provider with the application. Open up `config/app.php` and replace `Illuminate\Pagination\PaginationServiceProvider` the providers key to 
 ```
 AgelxNash\SEOPagination\PaginationServiceProvider
 ```
@@ -40,10 +40,10 @@ Configuration
 =============
 You will want to run the following command to publish the config to your application, otherwise it will be overwritten when the package is updated.
 ```shell
-php artisan config:publish agelxnash/seopagination
+php artisan vendor:publish --provider="AgelxNash\SEOPagination\PaginationServiceProvider"
 ```
 
-Now you can edit the file `app/config/packages/agelxnash/seopagination/config.php`
+Now you can edit the file `config/seo-pagination.php`
 ### action_on_error
 * **first** (*Send redirect to first pagination page with error_status response status code*)
 * **out** (*Send redirect to end pagination page with error_status response status code*)
@@ -54,15 +54,14 @@ Now you can edit the file `app/config/packages/agelxnash/seopagination/config.ph
 
 Usage
 ======
-After the call paginate() method, you need check data variable in the method `\AgelxNash\SEOPagination\Validation::checkPaginate()`. The result will be object `\Illuminate\Http\RedirectResponse`, or `false`
+After the call paginate() method, you need check data variable in the method `checkPaginate()`. The result will be object `\Illuminate\Http\RedirectResponse` or `true`
 Look at the example method of a controller with check pagination:
 ```php
 public function example()
 {
-	$post = Post::->orderBy('created_at', 'DESC')->paginate(10);
-	if(!is_object($out = \AgelxNash\SEOPagination\Validation::checkPaginate($post)))
-	{
-		$out = View::make('index', array('data'=> $post));
+	$posts = Post::->orderBy('created_at', 'DESC')->paginate(10);
+	if(($out = $posts->checkPaginate()) === true){
+		$out = View::make('index', array('data'=> $posts));
 	}
 	return $out;
 }
