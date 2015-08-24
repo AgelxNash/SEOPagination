@@ -38,7 +38,8 @@ trait ReplaceUrl{
 
 		$request = Request::get($this->getPageName());
 		$cPage = $this->currentPage();
-		if(($this->isEmpty() && 1!=$cPage) || (1==$cPage && !is_null($request) && (int)$request!=$cPage)){
+		if(1 == $cPage) $this->setActionOnError('first');
+		if((1 == (int)$request) || ($this->isEmpty() && 1!=$cPage) || (1==$cPage && !is_null($request) && (int)$request!=$cPage)){
 			if(is_null($keepQuery)){
 				$keepQuery = $this->getKeepQuery();
 			}
