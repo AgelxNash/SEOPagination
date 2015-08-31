@@ -43,7 +43,6 @@ class Builder extends \Illuminate\Database\Eloquent\Builder{
 		$perPage = $perPage ?: $this->model->getPerPage();
 
 		$this->skip(($page - 1) * $perPage)->take($perPage + 1);
-
 		return new Paginator($this->get($columns), $perPage, $page, [
 			'path' => Paginator::resolveCurrentPath(),
 			'pageName' => $pageName,

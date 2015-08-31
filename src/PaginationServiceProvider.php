@@ -32,6 +32,27 @@ class PaginationServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		$this->app->singleton('db.connection.mysql', function($app, $parameters) {
+          list($connection, $database, $prefix, $config) = $parameters;
+          return new \AgelxNash\SEOPagination\Connection\MySql($connection, $database, $prefix, $config);
+		});
+
+		$this->app->singleton('db.connection.pgsql', function($app, $parameters) {
+			list($connection, $database, $prefix, $config) = $parameters;
+			return new \AgelxNash\SEOPagination\Connection\Postgres($connection, $database, $prefix, $config);
+		});
+
+		$this->app->singleton('db.connection.sqlite', function($app, $parameters) {
+			list($connection, $database, $prefix, $config) = $parameters;
+			return new \AgelxNash\SEOPagination\Connection\SQLite($connection, $database, $prefix, $config);
+		});
+
+		$this->app->singleton('db.connection.sqlsrv', function($app, $parameters) {
+			list($connection, $database, $prefix, $config) = $parameters;
+			return new \AgelxNash\SEOPagination\Connection\SqlServer($connection, $database, $prefix, $config);
+		});
+
+
 		Paginator::currentPathResolver(function()
 		{
 			return $this->app['request']->url();
