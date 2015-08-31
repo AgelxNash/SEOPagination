@@ -5,16 +5,17 @@ use AgelxNash\SEOPagination\Paginator\LengthAwarePaginator;
 
 class Builder extends \Illuminate\Database\Query\Builder{
 	/**
-	 * Paginate the given query into a simple paginator.
-	 *
-	 * @param  int  $perPage
-	 * @param  array  $columns
-	 * @param  string  $pageName
-	 * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-	 */
-	public function paginate($perPage = 15, $columns = ['*'], $pageName = 'page')
-	{
-		$page = Paginator::resolveCurrentPage($pageName);
+     * Paginate the given query into a simple paginator.
+     *
+     * @param  int  $perPage
+     * @param  array  $columns
+     * @param  string  $pageName
+     * @param  int|null  $page
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function paginate($perPage = 15, $columns = ['*'], $pageName = 'page', $page = null)
+    {
+        $page = $page ?: Paginator::resolveCurrentPage($pageName);
 
 		$total = $this->getCountForPagination($columns);
 
