@@ -37,7 +37,7 @@ class Builder extends \Illuminate\Database\Query\Builder{
 	 * @param  string  $pageName
 	 * @return \Illuminate\Contracts\Pagination\Paginator
 	 */
-	public function simplePaginate($perPage = 15, $columns = ['*'], $pageName = 'page')
+	public function simplePaginate($perPage = 15, $columns = ['*'], $pageName = 'page', $page = null)
 	{
 		$page = Paginator::resolveCurrentPage($pageName);
 
