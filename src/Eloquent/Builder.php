@@ -36,7 +36,7 @@ class Builder extends \Illuminate\Database\Eloquent\Builder{
 	 * @param  string  $pageName
 	 * @return \Illuminate\Contracts\Pagination\Paginator
 	 */
-	public function simplePaginate($perPage = null, $columns = ['*'], $pageName = 'page')
+	public function simplePaginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
 	{
 		$page = Paginator::resolveCurrentPage($pageName);
 
