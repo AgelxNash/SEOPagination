@@ -1,8 +1,3 @@
-Update to Laravel 5.2 by Daguilarm
-====================
-
-Just a symple update to this great package.
-
 Laravel SEO Pagination
 ====================
 This extension pack pagination laravel. With it, you can prevent the opening of blank pages.
@@ -30,24 +25,10 @@ Installation
 ============
 ### Step 1
 
-Add to your composer file:
+```
+composer require agelxnash/seopagination:5.2.*@dev
+```
 
-```
-"repositories": [
-    {
-        "url": "https://github.com/daguilarm/SEOPagination.git",
-        "type": "vcs"
-    }
-],
-```
--------------
-
-And this in your `require:
-
-```
-"agelxnash/seopagination": "dev-laravel-5.2"
-```
--------------
 ### Step 2
 Once SEOPagination is installed you need to register the service provider with the application. Open up `config/app.php` and replace `Illuminate\Pagination\PaginationServiceProvider` the providers key to 
 ```
