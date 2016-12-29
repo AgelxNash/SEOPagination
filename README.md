@@ -24,15 +24,15 @@ etc.
 Installation
 ============
 ### Step 1
-```shell
-php composer.phar require agelxnash/seopagination:5.1.*@dev
+
 ```
--------------
+composer require agelxnash/seopagination:5.2.*@dev
+```
 
 ### Step 2
 Once SEOPagination is installed you need to register the service provider with the application. Open up `config/app.php` and replace `Illuminate\Pagination\PaginationServiceProvider` the providers key to 
 ```
-AgelxNash\SEOPagination\PaginationServiceProvider
+AgelxNash\SEOPagination\PaginationServiceProvider::class
 ```
 
 
