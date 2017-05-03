@@ -58,9 +58,9 @@ class PaginationServiceProvider extends ServiceProvider {
 			return $this->app['request']->url();
 		});
 
-		Paginator::currentPageResolver(function()
+		Paginator::currentPageResolver(function($pageName)
 		{
-			return $this->app['request']->input('page');
+			return $this->app['request']->input($pageName);
 		});
 
 		$configPath = __DIR__.'/../config/seo-pagination.php';
